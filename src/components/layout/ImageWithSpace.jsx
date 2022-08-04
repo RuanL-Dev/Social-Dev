@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const WiDTH_BREAK = '600px'
+const WiDTH_BREAK = '700px'
 
 const StyledFlex = styled.div`
   display: flex;
@@ -22,14 +22,21 @@ const StyledImage = styled.div`
 
 const StyledContainer = styled.div`
   background-colour: white;
-  padding: 30px;
+  padding: 30px 50px;
   
   @media (min-width: ${WiDTH_BREAK}) {
-    width: 100%;
-    min-width: calc(${WiDTH_BREAK} - 60px);
+    min-width: calc(${WiDTH_BREAK} - 100px);
   }
   @media (max-width: ${WiDTH_BREAK}) {
     width: 100%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: ${WiDTH_BREAK}) {
+    padding: 315px 50px;
   }
 `
 
