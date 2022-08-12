@@ -21,7 +21,7 @@ const StyledImage = styled.div`
 `
 
 const StyledContainer = styled.div`
-  background-colour: ${props => props.theme.white};
+  background-color: ${props => props.theme.white};
   padding: 30px 50px;
   
   @media (min-width: ${WiDTH_BREAK}) {
@@ -33,10 +33,14 @@ const StyledContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
 
-  @media (max-width: ${WiDTH_BREAK}) {
-    padding: 315px 50px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+
+  &:before, &:after {
+    content: '';
+    margin: auto;
   }
 `
 
