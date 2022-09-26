@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import axios from 'axios'
 import { useSWRConfig } from 'swr'
 
 import Menu from '../navigation/Menu'
+import EditPost from './EditPost'
 
 const PostContainer = styled.div`
   background-color: ${props => props.theme.white};
@@ -30,8 +32,15 @@ const ContainerMenu = styled.div`
 
 function Post ({ text, user, date, isOwner, id }) {
   const { mutate } = useSWRConfig()
-  const handleEdit = async () => {
+  const [editPost, setEditPost] = useState(false)
 
+  const handleEdit = async () => {
+    setEditPost(true)
+  }
+
+  const handleSaveEdit = () => {
+    setEditPost(false)
+    mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
   }
 
   const handleDelete = async () => {
@@ -70,7 +79,8 @@ function Post ({ text, user, date, isOwner, id }) {
       <StyledUsername>@{user}</StyledUsername>
       <StyledDate>{moment(date).format('LLL')}</StyledDate>
       <ContainerText>
-        {text}
+        {!editPost && text}
+        {editPost && <EditPost id={id} text={text} onSave={handleSaveEdit}/>}
       </ContainerText>
     </PostContainer>
   )
