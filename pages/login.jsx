@@ -44,7 +44,6 @@ function LoginPage () {
       const { status } = await axios.post (`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
       if (status === 200){
         router.push('/')
-        setLoading(false)
       }
     } catch ({ response }) {
       if (response.data === 'password incorrect') {
@@ -57,6 +56,8 @@ function LoginPage () {
           message: 'Usuário ou e-mail não encontrado.'
         })
       }
+    } finally {
+      setLoading(false)
     }
   }
 

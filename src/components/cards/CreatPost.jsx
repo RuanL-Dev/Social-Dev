@@ -55,11 +55,16 @@ function CreatPost ({ username }) {
   const [loading, setLoading] = useState(false)
 
   const onSubmit = async (data) => {
-    setLoading(true)
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, data)
-    if (response.status === 201) {
-      reset()
-      mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
+    try {
+      setLoading(true)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, data)
+      if (response.status === 201) {
+        reset()
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
+      }    
+    } catch (err) {
+      console.error(err)
+    } finally {
       setLoading(false)
     }
   }
