@@ -1,0 +1,13 @@
+### Delete post without required id should return 400
+DELETE http://localhost:3000/api/post
+Content-Type: application/json
+Cookie: {{sessionCookie}}
+
+{}
+
+### Edit post without required fields should return 400
+PATCH http://localhost:3000/api/post
+Content-Type: application/json
+Cookie: {{sessionCookie}}
+
+{}

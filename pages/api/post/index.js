@@ -32,7 +32,7 @@ handler
       return res.status(500).send(err.message)
     }
   })
-  .delete(validate(deletePostSchema), async (req, res) => {
+  .delete(validate({ body: deletePostSchema }), async (req, res) => {
     try {
       if (!req.session.user) return res.status(401).send()
       const deletedPost = await deletePost(req.body.id, req.session.user)
@@ -45,17 +45,18 @@ handler
       return res.status(500).send(err.message)
     }
   })
-  .patch(validate(editPostSchema), async (req, res) => {
-    try{
+  .patch(validate({ body: editPostSchema }), async (req, res) => {
+    try {
       if (!req.session.user) return res.status(401).send()
       const refreshPost = await editPost(req.body, req.session.user)
-      if(refreshPost)
+      if (refreshPost) {
         return res.status(200).send({ ok: true })
-      
-        return res.status(400).send('post not found')
+      }
+
+      return res.status(400).send('post not found')
     } catch (err) {
       return res.status(500).send(err.message)
     }
   })
 
-  export default withIronSessionApiRoute(handler, ironConfig)
+export default withIronSessionApiRoute(handler, ironConfig)
